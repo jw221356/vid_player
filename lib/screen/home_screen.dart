@@ -20,12 +20,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget renderEmpty(){
     return Container(
       width: MediaQuery.of(context).size.width,
+      decoration: getBoxDecoration(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _Logo(),
           SizedBox(height:30.0),
           _AppName(),
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration getBoxDecoration() {
+    return BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF2A3A7C),
+          Color(0xFF000118),
         ],
       ),
     );
