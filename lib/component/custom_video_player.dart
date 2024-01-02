@@ -91,17 +91,35 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                 ),
               Positioned(
                 bottom: 0,
-                right: 0,
                 left: 0,
-                child: Slider(
-                  onChanged: (double val) {
-                    videoController!.seekTo(
-                      Duration(seconds: val.toInt()),
-                    );
-                  },
-                  value: videoController!.value.position.inSeconds.toDouble(),
-                  min: 0,
-                  max: videoController!.value.duration.inSeconds.toDouble(),
+                right: 0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    children: [
+                      renderTimeTextFromDuration(
+                        videoController!.value.position,
+                      ),
+                      Expanded(
+                        child: Slider(
+                          onChanged: (double val) {
+                            videoController!.seekTo(
+                              Duration(seconds: val.toInt()),
+                            );
+                          },
+                          value: videoController!.value.position.inSeconds
+                              .toDouble(),
+                          min: 0,
+                          max: videoController!.value.duration.inSeconds
+                              .toDouble(),
+                        ),
+                      ),
+                      renderTimeTextFromDuration(
+
+                        videoController!.value.duration,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               if (showControls)
@@ -138,6 +156,15 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
             ],
           ),
         )
+    );
+  }
+
+  Widget renderTimeTextFromDuration(Duration duration) {
+    return Text(
+      '${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}',
+      style: TextStyle(
+        color: Colors.white,
+      ),
     );
   }
 
