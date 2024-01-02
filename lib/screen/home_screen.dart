@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:vid_player/component/custom_video_player.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: video == null ? renderEmpty() : renderVideo(),
     );
   }
+
   Widget renderEmpty(){
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -61,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget renderVideo(){
     return Center(
-      child: CustomVideoPlayer(),
+      child: CustomVideoPlayer(
+        video: video!,
+      ),
     );
   }
 }
